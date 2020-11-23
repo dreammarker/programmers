@@ -12,68 +12,63 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-
-let input = []
 let result = [];
 rl.on('line', function (line) {
-  input.push(line.trim());
-}).on('close', function () {
-    input.shift();
-    for(let i=0;i<input.length;i++){
-        if(input[i].includes("push_front")){
-           let num = input[i].split(" ")[1].trim();
-           num = parseInt(num);
-           result.unshift(num);
-        }
-        else if(input[i].includes("push_back")){
-            let num = input[i].split(" ")[1].trim();
-            num = parseInt(num);
-            result.push(num);
-        }
-        else if(input[i].includes("pop_front")){
-            if(result.length===0){
-                console.log(-1);
-            }
-            else{
-                console.log(result.shift());
-            }
-        }
-        else if(input[i].includes("pop_back")){
-            if(result.length===0){
-                console.log(-1);
-            }
-            else{
-                console.log(result.pop());
-            }
-        }
-        else if(input[i].includes("size")){
-           console.log(result.length);
-        }
-        else if(input[i].includes("empty")){
-            if(result.length===0){
-                console.log(1);
-             }
-             else{
-                 console.log(0);
-             }
-        }
-        else if(input[i].includes("back")){
-            if(result[result.length-1]){
-                console.log(result[result.length-1]);
-             }
-             else{
-                 console.log(-1);
-             }
-        }
-        else if(input[i].includes("front")){
-            if(result[0]){
-               console.log(result[0])
-            }
-            else{
-                console.log(-1);
-            }
-        }
-
+     let num = line.trim();
+     if(num.includes("push_front")){
+       num = num.split(" ")[1].trim();
+       num = parseInt(num);
+       [num].concat(result);
+       result.unshift(num);
     }
-    process.exit();
+    else if(num.includes("push_back")){
+        num = num.split(" ")[1].trim();
+        num = parseInt(num);
+        result.push(num);
+    }
+    else if(num.includes("pop_front")){
+        if(result.length===0){
+            console.log(-1);
+        }
+        else{
+            console.log(result.shift());
+        }
+    }
+    else if(num.includes("pop_back")){
+        if(result.length===0){
+            console.log(-1);
+        }
+        else{
+            console.log(result.pop());
+        }
+    }
+    else if(num.includes("size")){
+       console.log(result.length);
+    }
+    else if(num.includes("empty")){
+        if(result.length===0){
+            console.log(1);
+         }
+         else{
+             console.log(0);
+         }
+    }
+    else if(num.includes("back")){
+        if(result[result.length-1]){
+            console.log(result[result.length-1]);
+         }
+         else{
+             console.log(-1);
+         }
+    }
+    else if(num.includes("front")){
+        if(result[0]){
+           console.log(result[0])
+        }
+        else{
+            console.log(-1);
+        }
+    } 
+}).on('close', function () {
+      process.exit();
 });
